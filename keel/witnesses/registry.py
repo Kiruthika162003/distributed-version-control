@@ -23,6 +23,7 @@ WITNESSES = (
     "keel.witnesses.queueorder",
     "keel.witnesses.survivorship",
     "keel.witnesses.cloneproof",
+    "keel.witnesses.gauntlettrip",
 )
 
 
