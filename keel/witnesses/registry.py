@@ -12,6 +12,7 @@ WITNESSES = (
     "keel.witnesses.bisectcount",
     "keel.witnesses.dedupbill",
     "keel.witnesses.renametrust",
+    "keel.witnesses.leaseproof",
 )
 
 
