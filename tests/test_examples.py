@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from examples import (
     archaeologyday,
+    archivistday,
     collaborationday,
     featureweek,
     firstvoyage,
@@ -11,6 +12,27 @@ from examples import (
     policyday,
     releaseday,
 )
+
+
+class TestArchivistDay:
+    def test_the_day_reads_end_to_end(self, capsys):
+        assert archivistday.main() == 0
+        out = capsys.readouterr().out
+        assert "welcome; main stands at" in out
+        assert (
+            "toolbox.py has answered to 2 name(s): "
+            "toolbox.py <- utils.py"
+        ) in out
+        assert "renamed from utils.py (exact content)" in out
+        assert (
+            "config.txt: 1 line(s), average age 3.0 "
+            "of 3"
+        ) in out
+        assert "old growth" in out
+        assert (
+            "no findings; a clean report, said "
+            "without fanfare"
+        ) in out
 
 
 class TestPolicyDay:
