@@ -14,6 +14,7 @@ WITNESSES = (
     "keel.witnesses.renametrust",
     "keel.witnesses.leaseproof",
     "keel.witnesses.fsckdrill",
+    "keel.witnesses.rererebill",
 )
 
 
