@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from examples import featureweek, firstvoyage
+from examples import featureweek, firstvoyage, hotfixflow
 
 
 class TestFeatureWeek:
@@ -15,6 +15,20 @@ class TestFeatureWeek:
         assert "settle:  app.py: hand-merged" in out
         assert "with 2 parents" in out
         assert "1 commit(s) to review:" in out
+
+
+class TestHotfixFlow:
+    def test_the_flow_reads_end_to_end(self, capsys):
+        assert hotfixflow.main() == 0
+        out = capsys.readouterr().out
+        assert "Revert: enable debug in prod" in out
+        assert "cherry-picked from" in out
+        assert "tagged:  exactly v1.0.1" in out
+        assert (
+            "1 landed upstream under other addresses, "
+            "2 pending"
+        ) in out
+        assert "cherry-pick" in out
 
 
 class TestFirstVoyage:
