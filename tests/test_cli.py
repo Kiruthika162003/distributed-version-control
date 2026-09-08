@@ -77,6 +77,37 @@ class TestTheTrialVerb:
         ) in out
 
 
+class TestTheColophonVerb:
+    def test_the_closing_page_prints_from_the_lobby(
+        self, capsys
+    ):
+        assert main(["colophon"]) == 0
+        out = capsys.readouterr().out
+        assert out.startswith("colophon:")
+        assert "witness(es), 0 broken" in out
+        assert (
+            "numbers said plainly, nothing promised "
+            "beyond them"
+        ) in out
+
+    def test_the_lobby_lists_ten_verbs(self, capsys):
+        assert main([]) == 2
+        out = capsys.readouterr().out
+        for verb in (
+            "witnesses",
+            "check",
+            "summary",
+            "witness",
+            "demo",
+            "numbers",
+            "organs",
+            "voyages",
+            "trial",
+            "colophon",
+        ):
+            assert verb in out
+
+
 class TestNumbers:
     def test_every_measurement_is_printed(self, capsys):
         assert main(["numbers"]) == 0
