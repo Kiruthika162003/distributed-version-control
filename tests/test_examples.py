@@ -8,8 +8,36 @@ from examples import (
     hotfixflow,
     maintenanceday,
     messyday,
+    policyday,
     releaseday,
 )
+
+
+class TestPolicyDay:
+    def test_the_day_reads_end_to_end(self, capsys):
+        assert policyday.main() == 0
+        out = capsys.readouterr().out
+        assert "push of main by dana: ACCEPTED" in out
+        assert (
+            "push of main by dana: REFUSED, 2 hard "
+            "failure(s)"
+        ) in out
+        assert "closed for the release cut" in out
+        assert "0 review trailer(s) against 2" in out
+        assert (
+            "OVERRIDE: dana landed on main during "
+            "'the release cut', approved by priya, "
+            "ticket HOT-99"
+        ) in out
+        assert (
+            "1 branch(es) frozen, 1 landing(s) stopped, "
+            "1 override(s)"
+        ) in out
+        assert "2 landed, 1 bounced" in out
+        assert (
+            "bounced (conflicts with what landed ahead "
+            "on src/app.py)"
+        ) in out
 
 
 class TestReleaseDay:
