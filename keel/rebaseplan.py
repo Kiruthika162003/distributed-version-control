@@ -27,7 +27,7 @@ from keel.commits import Commit
 from keel.errors import Conflict, Invalid, Missing
 from keel.repo import Repo
 
-VERBS = ("pick", "drop", "squash", "reword")
+VERBS = ("pick", "drop", "squash", "fixup", "reword")
 
 
 @dataclass(frozen=True)
@@ -178,10 +178,10 @@ def _bind(
                 "vanishes from the todo is a drop nobody "
                 "typed, so type the drop"
             )
-    if named and named[0][0].verb == "squash":
+    if named and named[0][0].verb in ("squash", "fixup"):
         raise Invalid(
-            "the first step cannot squash; there is no "
-            "predecessor to fold into"
+            f"the first step cannot {named[0][0].verb}; "
+            "there is no predecessor to fold into"
         )
     return named
 
@@ -231,7 +231,10 @@ def execute(
             )
             continue
         applied = _replay(repo, commit, files)
-        if applied == 0 and step.verb != "squash":
+        if applied == 0 and step.verb not in (
+            "squash",
+            "fixup",
+        ):
             entries_meta.append(
                 (
                     commit.address,
@@ -240,21 +243,30 @@ def execute(
                 )
             )
             continue
-        if step.verb == "squash":
+        if step.verb in ("squash", "fixup"):
             if not pending:
                 raise Invalid(
-                    "squash found no landed predecessor "
-                    "to fold into"
+                    f"{step.verb} found no landed "
+                    "predecessor to fold into"
                 )
             _, kept_message, folded = pending[-1]
+            message = (
+                kept_message
+                if step.verb == "fixup"
+                else kept_message + "\n\n" + commit.message
+            )
             pending[-1] = (
                 dict(files),
-                kept_message + "\n\n" + commit.message,
+                message,
                 [*folded, commit.address],
             )
-            entries_meta.append(
-                (commit.address, "folded into predecessor")
+            note = (
+                "folded silently; fixup messages are "
+                "noise by definition"
+                if step.verb == "fixup"
+                else "folded into predecessor"
             )
+            entries_meta.append((commit.address, note))
             continue
         message = (
             step.argument
