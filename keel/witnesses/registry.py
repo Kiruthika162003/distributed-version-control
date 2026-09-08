@@ -18,6 +18,7 @@ WITNESSES = (
     "keel.witnesses.bundleproof",
     "keel.witnesses.gcpin",
     "keel.witnesses.shallowbill",
+    "keel.witnesses.patchidmatch",
 )
 
 
