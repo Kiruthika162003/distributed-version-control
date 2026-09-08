@@ -13,6 +13,7 @@ WITNESSES = (
     "keel.witnesses.dedupbill",
     "keel.witnesses.renametrust",
     "keel.witnesses.leaseproof",
+    "keel.witnesses.fsckdrill",
 )
 
 
