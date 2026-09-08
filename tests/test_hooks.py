@@ -52,7 +52,7 @@ class TestTheGauntlet:
     def test_a_broken_guard_fails_loudly(self):
         runner = HookRunner()
 
-        def unstable(files, message):
+        def unstable(_files, _message):
             raise RuntimeError("guard crashed")
 
         runner.register("flaky", unstable)
