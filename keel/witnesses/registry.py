@@ -11,6 +11,7 @@ WITNESSES = (
     "keel.witnesses.packbill",
     "keel.witnesses.bisectcount",
     "keel.witnesses.dedupbill",
+    "keel.witnesses.renametrust",
 )
 
 
