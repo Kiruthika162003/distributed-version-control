@@ -8,6 +8,7 @@ from keel.witnesses.finding import Testimony
 
 WITNESSES = (
     "keel.witnesses.wirebill",
+    "keel.witnesses.packbill",
 )
 
 
