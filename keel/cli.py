@@ -18,16 +18,7 @@ import argparse
 import importlib
 import sys
 
-EXAMPLES = (
-    "firstvoyage",
-    "featureweek",
-    "hotfixflow",
-    "archaeologyday",
-    "collaborationday",
-    "maintenanceday",
-    "messyday",
-    "releaseday",
-)
+from keel.voyages import names as example_names
 
 
 def _witness_names() -> list[str]:
@@ -94,10 +85,11 @@ def _run_witness(name: str) -> int:
 
 
 def _run_demo(name: str) -> int:
-    if name not in EXAMPLES:
+    known = example_names()
+    if name not in known:
         print(
             f"{name} is not a demo; the roster: "
-            + ", ".join(EXAMPLES)
+            + ", ".join(known)
         )
         return 2
     module = importlib.import_module(f"examples.{name}")
@@ -116,6 +108,13 @@ def _run_numbers() -> int:
 
 def _run_organs() -> int:
     from keel.organs import page
+
+    print(page())
+    return 0
+
+
+def _run_voyages() -> int:
+    from keel.voyages import page
 
     print(page())
     return 0
@@ -148,6 +147,10 @@ def main(argv: list[str] | None = None) -> int:
         "organs",
         help="every module and its opening sentence",
     )
+    commands.add_parser(
+        "voyages",
+        help="every example and its opening sentence",
+    )
     arguments = parser.parse_args(argv)
     if arguments.command == "witnesses":
         return _run_witnesses()
@@ -163,6 +166,8 @@ def main(argv: list[str] | None = None) -> int:
         return _run_numbers()
     if arguments.command == "organs":
         return _run_organs()
+    if arguments.command == "voyages":
+        return _run_voyages()
     parser.print_help()
     return 2
 
