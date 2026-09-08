@@ -4,6 +4,7 @@ from examples import (
     archaeologyday,
     archivistday,
     collaborationday,
+    commissioningday,
     featureweek,
     firstvoyage,
     fleetweek,
@@ -14,6 +15,27 @@ from examples import (
     policyday,
     releaseday,
 )
+
+
+class TestCommissioningDay:
+    def test_the_day_reads_end_to_end(self, capsys):
+        assert commissioningday.main() == 0
+        out = capsys.readouterr().out
+        assert "lanternfish founded at" in out
+        assert (
+            "the real landing would clear today"
+        ) in out
+        assert (
+            "bill of lading for main: 7 object(s)"
+        ) in out
+        assert "identical to the address" in out
+        assert (
+            "spliced 1 elder and 1 younger commit(s)"
+        ) in out
+        assert (
+            "blame reaches: 'the expedition log "
+            "opens' across the seam"
+        ) in out
 
 
 class TestFleetWeek:
