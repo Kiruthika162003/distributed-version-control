@@ -7,7 +7,38 @@ from examples import (
     firstvoyage,
     hotfixflow,
     maintenanceday,
+    messyday,
 )
+
+
+class TestMessyDay:
+    def test_the_day_reads_end_to_end(self, capsys):
+        assert messyday.main() == 0
+        out = capsys.readouterr().out
+        assert (
+            "shelved 1 file(s) as 'half-done app rewrite' "
+            "from feature"
+        ) in out
+        assert "entry removed" in out
+        assert (
+            out.count(
+                "1 path(s) merged clean, 0 settled by "
+                "diff3, 1 waiting for a person"
+            )
+            == 2
+        )
+        assert "recorded under" in out
+        assert "REPLAYED recording" in out
+        assert (
+            "1 recording(s), 1 replay(s); every replay is "
+            "a hand-resolution not retyped"
+        ) in out
+        assert (
+            "WARNING: shelved on feature, applied on main"
+        ) in out
+        assert (
+            "the shelf never loses anything quietly"
+        ) in out
 
 
 class TestMaintenanceDay:
