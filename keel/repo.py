@@ -74,6 +74,17 @@ class Repo:
             )
         return commit
 
+    def commit_with_parents(
+        self,
+        files: dict[str, bytes],
+        message: str,
+        parents: tuple[str, ...],
+    ) -> Commit:
+        tree = self.snapshot_tree(files)
+        return self.graph.create(
+            tree=tree, parents=parents, message=message
+        )
+
     def files_at(self, address: str) -> dict[str, bytes]:
         commit = self.graph.get(address)
         blobs = self.trees.read_tree(commit.tree)
