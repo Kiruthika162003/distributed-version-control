@@ -8,7 +8,25 @@ from examples import (
     hotfixflow,
     maintenanceday,
     messyday,
+    releaseday,
 )
+
+
+class TestReleaseDay:
+    def test_the_day_reads_end_to_end(self, capsys):
+        assert releaseday.main() == 0
+        out = capsys.readouterr().out
+        assert (
+            "8 changelog line(s) drafted for v1.1"
+        ) in out
+        assert "- rename the entry points" in out
+        assert "where:   v1.0+3" in out
+        assert "tag:     exactly v1.1" in out
+        assert "2 entrie(s) verified against the sealed" in out
+        assert (
+            "full bundle: 13 object(s), 4 commit(s)"
+        ) in out
+        assert "same address, no network involved" in out
 
 
 class TestMessyDay:
