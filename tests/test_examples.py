@@ -6,7 +6,29 @@ from examples import (
     featureweek,
     firstvoyage,
     hotfixflow,
+    maintenanceday,
 )
+
+
+class TestMaintenanceDay:
+    def test_the_day_reads_end_to_end(self, capsys):
+        assert maintenanceday.main() == 0
+        out = capsys.readouterr().out
+        assert out.count("physical clean") == 2
+        assert (
+            "the reflog pins what the journal remembers"
+        ) in out
+        assert (
+            "nothing unreachable; the census was the work"
+        ) in out
+        assert "reflog trimmed by 8 entrie(s)" in out
+        assert (
+            "freed 3 object(s): 1 blob(s), 1 commit(s), "
+            "1 tree(s)"
+        ) in out
+        assert (
+            "maintenance complete, receipts reconciled:"
+        ) in out
 
 
 class TestCollaborationDay:
