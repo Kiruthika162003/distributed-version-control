@@ -6,12 +6,36 @@ from examples import (
     collaborationday,
     featureweek,
     firstvoyage,
+    harborday,
     hotfixflow,
     maintenanceday,
     messyday,
     policyday,
     releaseday,
 )
+
+
+class TestHarborDay:
+    def test_the_day_reads_end_to_end(self, capsys):
+        assert harborday.main() == 0
+        out = capsys.readouterr().out
+        assert (
+            "the harbor holds this landing: 3 of 3 "
+            "gauntlet(s) object"
+        ) in out
+        assert (
+            "gates objecting: 5; the secret quoted: "
+            "False"
+        ) in out
+        assert "the sign comes down" in out
+        assert "the turn is over" in out
+        assert (
+            "the harbor clears this landing: three "
+            "gauntlets, one visit"
+        ) in out
+        assert (
+            "one desk, three buildings saved"
+        ) in out
 
 
 class TestArchivistDay:
