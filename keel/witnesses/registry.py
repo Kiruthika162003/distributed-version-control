@@ -24,6 +24,7 @@ WITNESSES = (
     "keel.witnesses.survivorship",
     "keel.witnesses.cloneproof",
     "keel.witnesses.gauntlettrip",
+    "keel.witnesses.convoycost",
 )
 
 

@@ -3,6 +3,7 @@ from __future__ import annotations
 from keel.factsheet import facts
 from keel.repo import Repo
 from keel.tags import TagStore
+from keel.witnesses import registry
 
 
 def build() -> tuple[Repo, TagStore]:
@@ -37,7 +38,10 @@ class TestTheSheet:
         repo, _tags = build()
         page = facts(repo, count_workshop=True)
         assert "organ(s) on the registry" in page
-        assert "17 witness(es) on the roster" in page
+        assert (
+            f"{len(registry.WITNESSES)} witness(es) "
+            "on the roster"
+        ) in page
 
     def test_the_sheet_recounts_after_changes(self):
         repo, tags = build()
