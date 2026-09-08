@@ -6,6 +6,7 @@ from examples import (
     collaborationday,
     featureweek,
     firstvoyage,
+    fleetweek,
     harborday,
     hotfixflow,
     maintenanceday,
@@ -13,6 +14,30 @@ from examples import (
     policyday,
     releaseday,
 )
+
+
+class TestFleetWeek:
+    def test_the_week_reads_end_to_end(self, capsys):
+        assert fleetweek.main() == 0
+        out = capsys.readouterr().out
+        assert "the last accord:" in out
+        assert "caller-two sails farthest" in out
+        assert "6 commit(s)" in out
+        assert (
+            "each one a conversation before any "
+            "history moves"
+        ) in out
+        assert (
+            "the convoy lands: 3 branch(es) as one "
+            "pointer move"
+        ) in out
+        assert (
+            "applied 3 move(s) as one decision:"
+        ) in out
+        assert (
+            "carried by main, 9 commit(s) below the "
+            "tip"
+        ) in out
 
 
 class TestHarborDay:
