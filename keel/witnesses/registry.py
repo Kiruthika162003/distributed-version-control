@@ -20,6 +20,7 @@ WITNESSES = (
     "keel.witnesses.shallowbill",
     "keel.witnesses.patchidmatch",
     "keel.witnesses.diff3matrix",
+    "keel.witnesses.queueorder",
 )
 
 
