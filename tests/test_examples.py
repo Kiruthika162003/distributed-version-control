@@ -2,10 +2,36 @@ from __future__ import annotations
 
 from examples import (
     archaeologyday,
+    collaborationday,
     featureweek,
     firstvoyage,
     hotfixflow,
 )
+
+
+class TestCollaborationDay:
+    def test_the_day_reads_end_to_end(self, capsys):
+        assert collaborationday.main() == 0
+        out = capsys.readouterr().out
+        assert "main created on the remote" in out
+        assert "main fast-forwarded, 3 object(s)" in out
+        assert (
+            "a plain push never discards commits someone "
+            "may be standing on"
+        ) in out
+        assert (
+            "diverged, ahead 1 behind 1 as of fetch #1; "
+            "the verb is a conversation"
+        ) in out
+        assert "lease broken" in out
+        assert (
+            "behind 2 as of fetch #2; the verb is merge "
+            "or rebase"
+        ) in out
+        assert (
+            'main holds "merge bob\'s coverage" with '
+            "2 parents"
+        ) in out
 
 
 class TestArchaeologyDay:
