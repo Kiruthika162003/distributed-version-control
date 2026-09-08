@@ -10,6 +10,7 @@ WITNESSES = (
     "keel.witnesses.wirebill",
     "keel.witnesses.packbill",
     "keel.witnesses.bisectcount",
+    "keel.witnesses.dedupbill",
 )
 
 
