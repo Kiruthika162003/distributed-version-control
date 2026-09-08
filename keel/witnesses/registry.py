@@ -16,6 +16,7 @@ WITNESSES = (
     "keel.witnesses.fsckdrill",
     "keel.witnesses.rererebill",
     "keel.witnesses.bundleproof",
+    "keel.witnesses.gcpin",
 )
 
 
