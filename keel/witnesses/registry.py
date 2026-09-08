@@ -22,6 +22,7 @@ WITNESSES = (
     "keel.witnesses.diff3matrix",
     "keel.witnesses.queueorder",
     "keel.witnesses.survivorship",
+    "keel.witnesses.cloneproof",
 )
 
 
