@@ -1,6 +1,26 @@
 from __future__ import annotations
 
-from examples import featureweek, firstvoyage, hotfixflow
+from examples import (
+    archaeologyday,
+    featureweek,
+    firstvoyage,
+    hotfixflow,
+)
+
+
+class TestArchaeologyDay:
+    def test_the_dig_reads_end_to_end(self, capsys):
+        assert archaeologyday.main() == 0
+        out = capsys.readouterr().out
+        assert "blame:   3 line(s):" in out
+        assert (
+            "pickaxe: 'use_old': 2 count change(s), "
+            "0 occurrence(s) today"
+        ) in out
+        assert "range:   app.py:2-3: 2 event(s)" in out
+        assert (
+            "bisect:  culprit is 'the migration'"
+        ) in out
 
 
 class TestFeatureWeek:
