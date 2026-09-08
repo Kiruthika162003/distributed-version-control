@@ -120,6 +120,18 @@ def _run_voyages() -> int:
     return 0
 
 
+def _run_trial() -> int:
+    from keel.errors import Corrupt
+    from keel.seatrial import run_trial
+
+    try:
+        print(run_trial())
+    except Corrupt as leak:
+        print(f"the trial stops: {leak}")
+        return 1
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="keel")
     commands = parser.add_subparsers(dest="command")
@@ -151,6 +163,10 @@ def main(argv: list[str] | None = None) -> int:
         "voyages",
         help="every example and its opening sentence",
     )
+    commands.add_parser(
+        "trial",
+        help="one honest maneuver per system, now",
+    )
     arguments = parser.parse_args(argv)
     if arguments.command == "witnesses":
         return _run_witnesses()
@@ -168,6 +184,8 @@ def main(argv: list[str] | None = None) -> int:
         return _run_organs()
     if arguments.command == "voyages":
         return _run_voyages()
+    if arguments.command == "trial":
+        return _run_trial()
     parser.print_help()
     return 2
 

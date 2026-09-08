@@ -65,6 +65,18 @@ class TestDemos:
         assert "releaseday" in out
 
 
+class TestTheTrialVerb:
+    def test_the_trial_runs_from_the_lobby(
+        self, capsys
+    ):
+        assert main(["trial"]) == 0
+        out = capsys.readouterr().out
+        assert out.startswith("sea trial:")
+        assert (
+            "7 system(s) exercised, all answered"
+        ) in out
+
+
 class TestNumbers:
     def test_every_measurement_is_printed(self, capsys):
         assert main(["numbers"]) == 0
