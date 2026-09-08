@@ -21,6 +21,7 @@ WITNESSES = (
     "keel.witnesses.patchidmatch",
     "keel.witnesses.diff3matrix",
     "keel.witnesses.queueorder",
+    "keel.witnesses.survivorship",
 )
 
 
