@@ -114,6 +114,13 @@ def _run_numbers() -> int:
     return 0
 
 
+def _run_organs() -> int:
+    from keel.organs import page
+
+    print(page())
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="keel")
     commands = parser.add_subparsers(dest="command")
@@ -137,6 +144,10 @@ def main(argv: list[str] | None = None) -> int:
     commands.add_parser(
         "numbers", help="every witness's measurements"
     )
+    commands.add_parser(
+        "organs",
+        help="every module and its opening sentence",
+    )
     arguments = parser.parse_args(argv)
     if arguments.command == "witnesses":
         return _run_witnesses()
@@ -150,6 +161,8 @@ def main(argv: list[str] | None = None) -> int:
         return _run_demo(arguments.name)
     if arguments.command == "numbers":
         return _run_numbers()
+    if arguments.command == "organs":
+        return _run_organs()
     parser.print_help()
     return 2
 
