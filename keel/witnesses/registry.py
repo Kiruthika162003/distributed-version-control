@@ -19,6 +19,7 @@ WITNESSES = (
     "keel.witnesses.gcpin",
     "keel.witnesses.shallowbill",
     "keel.witnesses.patchidmatch",
+    "keel.witnesses.diff3matrix",
 )
 
 
