@@ -34,3 +34,41 @@ class TestTheCli:
     def test_no_command_prints_help(self, capsys):
         assert main([]) == 2
         assert "usage" in capsys.readouterr().out
+
+
+class TestSingleWitness:
+    def test_one_testimony_with_its_numbers(self, capsys):
+        assert main(["witness", "gcpin"]) == 0
+        out = capsys.readouterr().out
+        assert out.startswith("gcpin: holds")
+        assert "claim:" in out
+        assert "freed_while_pinned = 0" in out
+
+    def test_a_stranger_gets_the_roster(self, capsys):
+        assert main(["witness", "ghost"]) == 2
+        out = capsys.readouterr().out
+        assert "ghost is not a witness" in out
+        assert "wirebill" in out
+        assert "diff3matrix" in out
+
+
+class TestDemos:
+    def test_a_demo_runs_end_to_end(self, capsys):
+        assert main(["demo", "firstvoyage"]) == 0
+        out = capsys.readouterr().out
+        assert "log:     2 commit(s) on main" in out
+
+    def test_a_stranger_demo_gets_the_roster(self, capsys):
+        assert main(["demo", "ghost"]) == 2
+        out = capsys.readouterr().out
+        assert "ghost is not a demo" in out
+        assert "releaseday" in out
+
+
+class TestNumbers:
+    def test_every_measurement_is_printed(self, capsys):
+        assert main(["numbers"]) == 0
+        out = capsys.readouterr().out
+        assert "wirebill:" in out
+        assert "shallowbill:" in out
+        assert "full_cost = 30" in out
