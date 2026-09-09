@@ -1,3 +1,6 @@
+# The credential-shaped strings in this file are synthetic fixtures. They exist
+# to give the scanner something to match and they authenticate against nothing.
+# No real password, key, token, or personal data appears anywhere in this file.
 """The worst landing ever attempted, and every gate still speaks once.
 
 The one-trip rule is a promise repeated in three gauntlets,

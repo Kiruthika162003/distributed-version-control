@@ -57,7 +57,7 @@ class TestGrammar:
 
     def test_unknown_keys_get_the_grammar_back(self):
         with pytest.raises(Invalid) as caught:
-            parse_query("author:kiruthika")
+            parse_query("author:avery")
         assert "not in the grammar" in str(caught.value)
         assert "merge:only or merge:none" in str(
             caught.value

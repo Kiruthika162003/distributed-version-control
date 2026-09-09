@@ -10,7 +10,7 @@ def build() -> AccessTable:
     table = AccessTable()
     table.enroll("team-infra", "priya")
     table.enroll("team-infra", "devi")
-    table.enroll("team-release", "kiruthika")
+    table.enroll("team-release", "avery")
     table.grant("infra/", "team-infra")
     table.grant("*.pem", "team-infra")
     table.grant("infra/release.cfg", "team-release")
@@ -45,10 +45,10 @@ class TestGovernance:
     def test_any_guarding_team_suffices(self):
         table = build()
         assert table.may_write(
-            "kiruthika", "infra/release.cfg"
+            "avery", "infra/release.cfg"
         )
         assert not table.may_write(
-            "kiruthika", "infra/deploy.sh"
+            "avery", "infra/deploy.sh"
         )
 
     def test_ungoverned_paths_stay_open(self):

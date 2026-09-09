@@ -1,3 +1,6 @@
+# The credential-shaped strings in this file are synthetic fixtures. They exist
+# to give the scanner something to match and they authenticate against nothing.
+# No real password, key, token, or personal data appears anywhere in this file.
 """A harbor day: one desk, three gauntlets, two landings, no ambushes.
 
 The morning landing fails everywhere at once and every gate

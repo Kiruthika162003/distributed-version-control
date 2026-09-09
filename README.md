@@ -68,5 +68,3 @@ and excluding docstrings, comments, and blanks. About one hundred and twenty
 modules, eighteen witnesses, thirteen examples, ten CLI verbs, and one rule
 that never bent: every commit in this history was made with the full test
 suite passing.
-
-Written by Kiruthika Subramani in collaboration with Claude, Anthropic's AI assistant.

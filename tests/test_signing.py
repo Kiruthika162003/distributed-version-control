@@ -21,7 +21,7 @@ def build() -> tuple[Repo, list[str]]:
 
 def enrolled() -> Keyring:
     ring = Keyring()
-    ring.enroll("kiruthika", "orchard-gate-11")
+    ring.enroll("avery", "orchard-gate-11")
     return ring
 
 
@@ -34,7 +34,7 @@ class TestKeyring:
     def test_double_enrollment_is_refused(self):
         ring = enrolled()
         with pytest.raises(Invalid) as caught:
-            ring.enroll("kiruthika", "different-key-22")
+            ring.enroll("avery", "different-key-22")
         assert "old marks stay checkable" in str(
             caught.value
         )
@@ -48,14 +48,14 @@ class TestKeyring:
 
     def test_a_valid_mark_names_its_voucher(self):
         ring = enrolled()
-        signature = ring.sign("kiruthika", "aa" * 10)
+        signature = ring.sign("avery", "aa" * 10)
         assert ring.verdict(signature) == (
-            "valid: kiruthika vouched"
+            "valid: avery vouched"
         )
 
     def test_a_forged_mark_is_named_forged(self):
         ring = enrolled()
-        honest = ring.sign("kiruthika", "aa" * 10)
+        honest = ring.sign("avery", "aa" * 10)
         forged = Signature(
             signer=honest.signer,
             address=honest.address,
@@ -78,7 +78,7 @@ class TestChain:
         repo, addresses = build()
         ledger = SignedLedger(keyring=enrolled())
         for address in addresses:
-            ledger.attach("kiruthika", address)
+            ledger.attach("avery", address)
         page = ledger.chain(repo, addresses[-1])
         assert page == (
             "chain complete: 3 commit(s) verified back to "
@@ -88,8 +88,8 @@ class TestChain:
     def test_trust_ends_at_the_first_unsigned_link(self):
         repo, addresses = build()
         ledger = SignedLedger(keyring=enrolled())
-        ledger.attach("kiruthika", addresses[2])
-        ledger.attach("kiruthika", addresses[1])
+        ledger.attach("avery", addresses[2])
+        ledger.attach("avery", addresses[1])
         page = ledger.chain(repo, addresses[2])
         assert page.startswith(
             "trust extends 2 commit(s) from the tip"
@@ -103,7 +103,7 @@ class TestChain:
         repo, addresses = build()
         ledger = SignedLedger(keyring=enrolled())
         for address in addresses:
-            ledger.attach("kiruthika", address)
+            ledger.attach("avery", address)
         honest = ledger.signatures[addresses[0]]
         ledger.signatures[addresses[0]] = Signature(
             signer=honest.signer,
@@ -127,7 +127,7 @@ class TestChain:
             (addresses[-1], side.address),
         )
         ledger = SignedLedger(keyring=enrolled())
-        ledger.attach("kiruthika", merged.address)
+        ledger.attach("avery", merged.address)
         page = ledger.chain(repo, merged.address)
         assert "pauses at merge" in page
         assert "each parent line needs its own walk" in page
